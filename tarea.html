@@ -216,9 +216,25 @@ button:last-of-type {
 
     // Rama "editar"
     function editSelected() {
-      
-      
-    }
+  if (selectedId === null) {
+    setStatus("Selecciona una tarea para editar.", "danger");
+    return;
+  }
+
+  const newText = prompt("Nuevo texto de la tarea:");
+
+  if (!newText || newText.trim() === "") {
+    setStatus("Edición cancelada.", "muted");
+    return;
+  }
+
+  const task = tasks.find(t => t.id === selectedId);
+  task.text = newText.trim();
+
+  setStatus("Tarea editada correctamente.", "ok");
+  render();
+}
+
 
     // =========================
     // Inicio
